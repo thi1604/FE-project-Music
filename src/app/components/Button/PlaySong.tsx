@@ -1,5 +1,6 @@
 // import { useRouter } from "next/navigation";
 import { base_url } from "../global";
+let timeoutId: NodeJS.Timeout;
 
 export async function PlaySong( SongCurrent:any, router: any) {
   const route = router;
@@ -35,9 +36,9 @@ export async function PlaySong( SongCurrent:any, router: any) {
       //Lay tong thoi gian
       audioElement.onloadedmetadata = () => {
         timeTotal = audioElement.duration;
-        clearTimeout();
+        clearTimeout(timeoutId);
         //Tinh nang tang luot nghe(nghe it nhat 4/5 bai hat)
-        setTimeout(() => {
+        timeoutId = setTimeout(() => {
           audioElement.onended = async () => {
             await fetch(`${base_url}/songs/listen/${Song.slug}`, {
               headers: {
