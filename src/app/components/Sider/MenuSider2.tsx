@@ -6,7 +6,7 @@ import { RiLoginCircleLine } from "react-icons/ri";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
-import { Logout } from "../Logout/page";
+import { Logout } from "../Logout/Logout";
 import { useEffect, useState } from "react";
 
 const listNav = [
