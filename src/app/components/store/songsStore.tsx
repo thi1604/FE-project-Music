@@ -4,12 +4,12 @@ import { persist, PersistOptions } from 'zustand/middleware';
 type SongStore = {
   songsSlug: string[];
   changeInfo: string,
-  isRepeat: Boolean;
+  isRepeat: boolean;
   addSong: (name: string) => void;
   removeLastSong: () => void;
   getSong: () => void;
   setRepeat: (value: boolean) => void;
-  getRepeat: () => Boolean;
+  getRepeat: () => boolean;
   setChangeUser: (value: string) => void;
   getChangeUser: () => string;
 };
