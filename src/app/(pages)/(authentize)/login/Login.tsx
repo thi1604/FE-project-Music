@@ -4,15 +4,19 @@ import { InputForm } from "@/app/components/SubForm/SubForm";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { Toaster, toast } from 'sonner'
-
 
 export const LoginUser = () => {
   const router = useRouter();
-  const alertBox = document.querySelector(".inner-box-alert");
-  const alert = alertBox?.querySelector(".inner-alert");
-  alert?.classList.add("hidden");
-  Cookies.remove("showAlert");
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const alertBox = document.querySelector(".inner-box-alert");
+      const alert = alertBox?.querySelector(".inner-alert");
+      alert?.classList.add("hidden");
+    }
+    Cookies.remove("showAlert");
+  }, []); // Chạy 1 lần khi component mount
   const handleSubmitForm = async (event:any) => {
     event.preventDefault();
     const email = event.target.email.value;
