@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 export default async function CategoriesPage() {
   let data:any = await fetch(`${base_url}/topics`);
+  console.log()
   data = await data.json();
 
   const dataSection3 = data.map((item:any) => {
