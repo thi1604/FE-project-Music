@@ -1,101 +1,87 @@
-import Image from "next/image";
+import { Metadata } from "next";
+import { CardItem } from "./components/Card/CardItem";
+import { ItemSong } from "./components/ItemSong/ItemSong";
+import { Title } from "./components/Title/Title";
+import { base_url } from "./components/global";
+import Link from "next/link";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Trang chủ",
+  description: "Project nghe nhạc trực tuyến",
+};
+
+
+export default async function HomePage () {
+
+  let data2And3 : any = await fetch(`${base_url}`);
+  data2And3 = await data2And3.json();
+
+  let dataSec1 : any = await fetch(`${base_url}/songs/topSongs`);
+  dataSec1 = await dataSec1.json();
+  
+  const dataSection1 = dataSec1.dataFinal.map((item:any) => {
+    return {
+      songName: item.title,
+      image: item.avatar,
+      numberListen: item.listenNumber,
+      singers: item.singers,
+      slug: item.slug,
+      audio: item.audio
+    }
+  });
+
+  const dataSection2 = data2And3.listTopicsOS;
+
+  const dataSection3 = data2And3.listSingesrOS;
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      {/* Section-1 */}
+      <div className="xm:h-[361px] flex lg:flex-nowrap gap-x-[20px] md:flex-wrap">
+        <div className="hidden xm:w-[55%] lg:w-[53%] md:w-full bg-[url('/assets/imgs/img-bg-2.png')] bg-cover bg-center rounded-[15px] md:flex items-center ">
+            <div className="font-[700] text-[32px] lg:text-[30px] text-[#FFFFFF] w-[231px] ml-[30px] lg:ml-[15px] lg:w-[50%] mb-[20px]">
+              <h2 className="mb-[6px]">
+                Nhạc EDM
+              </h2>
+              <div className="font-[500] text-[14px] text-[#FFFFFF]">
+                Top 100 Nhạc Electronic/Dance Âu Mỹ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Top 100 Nhạc Electronic/Dance Âu Mỹ
+              </div>
+            </div> 
+          <div className="w-[215px] lg:w-[200px] lg:h-[280px] mt-[40px] lg:mt-[115px]">
+            <img src="/assets/imgs/img-bg-1.png" alt="Bìa nhạc" className="object-cover w-full h-full"/>
+          </div> 
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        <div className="w-full mx-[20px] sm:mx-0 flex-1 md:mt-[15px] sm:w-[45%]">
+          <Title text="Nghe nhiều"/>
+          <div className="grid grid-cols-1 gap-[12px] md:w-[full] mt-[15px] lg:mt-[10px]">
+            {dataSection1.map((item:any, index:number) => (
+              <ItemSong data={item} key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Section2 */}
+      <div className="mt-[30px]">
+        <Title text="Danh Mục Nổi Bật"/>
+        <div className="grid grid-cols-3 gap-[15px] xl:grid-cols-5 xl:gap-[20px] lg:grid-cols-4 lg:gap-[10px] md:grid-cols-2 md:gap-[15px] mt-[20px]">
+          {dataSection2.map((item : any, index : number) => (
+            <Link href={`/categories/${item.slug}`} key={index}>
+              <CardItem data={item} key={index}/>
+            </Link>
+          ))}
+        </div>
+      </div>
+      {/* Section-3 */}
+      <div className="mt-[30px]">
+        <Title text="Ca Sĩ Nổi Bật"/>
+        <div className="grid grid-cols-3 gap-[15px] xl:grid-cols-5 xl:gap-[20px] lg:grid-cols-4 lg:gap-[10px] md:grid-cols-2 md:gap-[15px] mt-[20px]">
+          {dataSection3.map((item : any, index : number) => (
+            <Link href={`/singers/${item.slug}`} key={index}>
+              <CardItem data={item} key={index}/>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </>
+  )
 }
