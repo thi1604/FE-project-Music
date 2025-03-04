@@ -11,7 +11,11 @@ export const metadata: Metadata = {
 
 
 export default async function SingerPage() {
-  let data:any = await fetch(`${base_url}/singers`);
+  let data:any = await fetch(`${base_url}/singers`, {
+    headers: {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    },
+  });
   data = await data.json();
 
   const dataSection3 = data.map((item:any) => {
