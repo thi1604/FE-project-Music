@@ -93,7 +93,7 @@ export async function PlaySong( SongCurrent:any, router: any) {
     const boxAction = boxAudio.querySelector(".inner-action-1");
     const getLyricSong = boxAction?.querySelector(".inner-lyric-song");
     if(getLyricSong){
-      // getLyricSong.classList.add(`${Song.slug}`);
+      getLyricSong.classList.add(`${Song.slug}`);
       getLyricSong.addEventListener("click", () => {
         route.push(`/songs/${Song.slug}`);
       });
