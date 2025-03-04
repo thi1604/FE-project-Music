@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
   export const LyricSong = (props: any) => {
     const {lyric} = props;
     const params = useParams();
-    const slugCurrentPage = params.slug;
+    const slugCurrentPage = params.id;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [lyricParse, setLyricParse] = useState<any[]>();
     
