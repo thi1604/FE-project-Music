@@ -101,6 +101,7 @@ export async function PlaySong( SongCurrent:any, router: any) {
     //Tu dong next sang bai khac khi ket thuc
     audioElement.onended = () => {
       const buttonNext = boxAction?.querySelector(".inner-next-song");
+      getLyricSong.classList.remove(`${Song.slug}`); //Xoa di slug bai hat hien tai trong micro
       if(buttonNext){
         buttonNext.click();
       }
