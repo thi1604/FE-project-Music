@@ -1,6 +1,7 @@
   "use client"
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import useSongStore from '../store/songsStore';
 
   export const LyricSong = (props: any) => {
     const {lyric} = props;
@@ -8,7 +9,7 @@ import { useEffect, useState } from 'react';
     const slugCurrentPage = params.id;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [lyricParse, setLyricParse] = useState<any[]>();
-    
+    const {getSong} = useSongStore();
     useEffect(() => {
       let lyricFinal :any[] = [];
       lyricFinal = lyric.split("\n");
@@ -42,10 +43,9 @@ import { useEffect, useState } from 'react';
             return currentTime >= line.time && (i == lyricParse.length - 1 || currentTime < lyricParse[i + 1].time);
           })
           //Check xem lyric cua bai hat dang phat va trang chi tiet bai hat co trung nhau khong
-          const boxAction = boxAudio.querySelector(".inner-action-1");
-          const getLyricSong = boxAction?.querySelector(".inner-lyric-song");
-          const checkLyricCurrent = getLyricSong.classList.contains(`${slugCurrentPage}`)
-          if(index != -1 && checkLyricCurrent){
+          const slugCurrentButton = getSong();
+          
+          if(index != -1 && (slugCurrentButton == slugCurrentPage)){
             setCurrentIndex(index);
           }
           newLyric = [...lyricParse];
