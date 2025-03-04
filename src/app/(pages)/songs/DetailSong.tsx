@@ -3,7 +3,7 @@ import { base_url } from "@/app/components/global";
 import { ItemSong2 } from "@/app/components/ItemSong/ItemSong2";
 import { Title } from "@/app/components/Title/Title";
 import { Metadata } from "next";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import parse from 'html-react-parser';
 import { LyricSong } from "@/app/components/LyricSong/LyricSong";
 
@@ -108,7 +108,9 @@ export const DetailSong = (props:any) => {
         {parse(lyric)}
       </div> */}
       {/* <LyricSong lyric={lyric}/> */}
-      {lyric && <LyricSong lyric={lyric}/>}
+      <Suspense>
+        {lyric && <LyricSong lyric={lyric}/>}
+      </Suspense>
       {/* Section-3 */}
       <Title text="Bài Hát Cùng Danh Mục"/>
       <div className="grid grid-cols-1 gap-y-[10px]">

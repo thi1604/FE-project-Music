@@ -1,8 +1,11 @@
   "use client"
-  import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
   export const LyricSong = (props: any) => {
     const {lyric} = props;
+    const params = useParams();
+    const slugCurrentPage = params.slug;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [lyricParse, setLyricParse] = useState<any[]>();
     
@@ -38,7 +41,11 @@
           const index = lyricParse.findIndex((line, i)=> {
             return currentTime >= line.time && (i == lyricParse.length - 1 || currentTime < lyricParse[i + 1].time);
           })
-          if(index != -1){
+          //Check xem lyric cua bai hat dang phat va trang chi tiet bai hat co trung nhau khong
+          const boxAction = boxAudio.querySelector(".inner-action-1");
+          const getLyricSong = boxAction?.querySelector(".inner-lyric-song");
+          const checkLyricCurrent = getLyricSong.classList.contains(`${slugCurrentPage}`)
+          if(index != -1 && checkLyricCurrent){
             setCurrentIndex(index);
           }
           newLyric = [...lyricParse];
@@ -47,7 +54,6 @@
       audioElement?.addEventListener("timeupdate", updateLyrics);
       return () => audioElement?.removeEventListener("timeupdate", updateLyrics);
     }, [lyricParse]);
-    
     return (
       <>
         <div 
