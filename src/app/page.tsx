@@ -13,10 +13,20 @@ export const metadata: Metadata = {
 
 export default async function HomePage () {
 
-  let data2And3 : any = await fetch(`${base_url}`);
+  let data2And3 : any = await fetch(`${base_url}`,{
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    }
+  });
   data2And3 = await data2And3.json();
 
-  let dataSec1 : any = await fetch(`${base_url}/songs/topSongs`);
+  let dataSec1 : any = await fetch(`${base_url}/songs/topSongs`,{
+    cache: "no-store",
+    headers: {
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    }
+  });
   dataSec1 = await dataSec1.json();
   
   const dataSection1 = dataSec1.dataFinal.map((item:any) => {

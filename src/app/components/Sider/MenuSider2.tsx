@@ -39,7 +39,7 @@ const listNav = [
 
 export default function MenuSider(){
   const pathNameCurrent = usePathname();
-  console.log(pathNameCurrent);
+  // console.log(pathNameCurrent);
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {

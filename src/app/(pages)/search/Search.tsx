@@ -16,7 +16,12 @@ export const SearchResult = (props: any) => {
   useEffect(() => {
     // Lay du lieu bai hat tu keyword
     async function fetchDataSearch() {
-      await fetch(`${base_url}/songs/search/${keyword}`)
+      await fetch(`${base_url}/songs/search/${keyword}`,{
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        }
+      })
       .then(res=> res.json())
       .then((data => {
     

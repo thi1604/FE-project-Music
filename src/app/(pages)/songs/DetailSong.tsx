@@ -22,7 +22,12 @@ export const DetailSong = (props:any) => {
     // lay ra chi tiet bai hat
     async function fetchDataSong() {
       let dataFinal :any
-      await fetch(`${base_url}/songs/detail/${slugSong}`)
+      await fetch(`${base_url}/songs/detail/${slugSong}`,{
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        }
+      })
       .then(res=> res.json())
       .then((data => {
         dataFinal = data;

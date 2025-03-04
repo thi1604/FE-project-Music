@@ -43,7 +43,7 @@ const listNav = [
 
 export default function Sider(){
   const pathNameCurrent = usePathname();
-  console.log(pathNameCurrent);
+  // console.log(pathNameCurrent);
   const [isLogin, setIsLogin] = useState(false);
   const [isShowNav, setShowNav] = useState(false);
   const [isShowSearch, setShowSearch] = useState(false);
