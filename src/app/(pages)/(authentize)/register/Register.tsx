@@ -36,6 +36,7 @@ export default function Register() {
       if(data.code == 200){
         toast(data.messages);
         Cookies.set("userToken", data.token);
+        Cookies.set("showAlert", "false");
         router.push("/");
       }
       else{

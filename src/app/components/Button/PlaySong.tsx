@@ -93,7 +93,7 @@ export async function PlaySong( SongCurrent:any, router: any) {
     const boxAction = boxAudio.querySelector(".inner-action-1");
     const getLyricSong = boxAction?.querySelector(".inner-lyric-song");
     if(getLyricSong){
-      getLyricSong.classList.add(`${Song.slug}`);
+      // getLyricSong.classList.add(`${Song.slug}`);
       getLyricSong.addEventListener("click", () => {
         route.push(`/songs/${Song.slug}`);
       });
@@ -101,7 +101,7 @@ export async function PlaySong( SongCurrent:any, router: any) {
     //Tu dong next sang bai khac khi ket thuc
     audioElement.onended = () => {
       const buttonNext = boxAction?.querySelector(".inner-next-song");
-      getLyricSong.classList.remove(`${Song.slug}`); //Xoa di slug bai hat hien tai trong micro
+      // getLyricSong.classList.remove(`${Song.slug}`); //Xoa di slug bai hat hien tai trong micro
       if(buttonNext){
         buttonNext.click();
       }

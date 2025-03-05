@@ -9,6 +9,7 @@ export const Logout = () => {
   const router = useRouter();
   const handleLogout = () => {
     Cookies.remove("userToken");
+    // Cookies.set("show")
     router.push("/login");
   }
   const pathNameCurrent = usePathname();
