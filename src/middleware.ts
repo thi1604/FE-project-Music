@@ -2,14 +2,9 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { base_url } from "./app/components/global";
 
-export const dynamic = "force-dynamic"; 
-
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("userToken"); // Lấy token từ cookie
   const res = NextResponse.redirect(new URL("/register", req.url));
-  res.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
-  res.headers.set("Pragma", "no-cache");
-  res.headers.set("Expires", "0");
   res.cookies.set("showAlert", "true");
   if(token){
     await fetch(`${base_url}/user/authenToken`, {

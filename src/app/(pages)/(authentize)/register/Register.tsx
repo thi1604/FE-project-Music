@@ -6,9 +6,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 
-
 export default function Register() {
   const showAlert = Cookies.get("showAlert");
+  console.log(showAlert);
   const router = useRouter();
   if(showAlert === "true"){
     console.log(showAlert);
@@ -29,6 +29,7 @@ export default function Register() {
     await fetch(`${base_url}/user/register`,{
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
       },
       method: "POST",
       body: JSON.stringify(dataForm)
