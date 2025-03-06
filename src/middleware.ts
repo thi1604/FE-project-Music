@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { base_url } from "./app/components/global";
 
+export const dynamic = "force-dynamic"; 
+
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("userToken"); // Lấy token từ cookie
   const res = NextResponse.redirect(new URL("/register", req.url));
-  res.cookies.set("showAlert", "true");
   res.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.headers.set("Pragma", "no-cache");
   res.headers.set("Expires", "0");
+  res.cookies.set("showAlert", "true");
   if(token){
     await fetch(`${base_url}/user/authenToken`, {
       headers: {
@@ -23,20 +25,11 @@ export async function middleware(req: NextRequest) {
         return NextResponse.next();
       }
       else{
-        // res.cookies.set("showAlert", "true");
-        // return NextResponse.redirect(new URL("/register", req.url));
-        // const alertBox = document.querySelector(".inner-box-alert");
-        // console.log(alertBox);
-        // alertBox?.classList.remove("hidden")
         return res;
       }
     })
   }
   else{
-    // res.cookies.set("showAlert", "true");
-    // return NextResponse.redirect(new URL("/register", req.url));
-    // const alertBox = document.querySelector(".inner-box-alert");
-    // console.log(alertBox);
     return res;
   }
 }
