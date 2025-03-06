@@ -11,6 +11,7 @@ export default function Register() {
   const showAlert = Cookies.get("showAlert");
   const router = useRouter();
   if(showAlert === "true"){
+    console.log(showAlert);
     const alertBox = document.querySelector(".inner-box-alert");
     const alert = alertBox?.querySelector(".inner-alert");
     alert?.classList.remove("hidden");
