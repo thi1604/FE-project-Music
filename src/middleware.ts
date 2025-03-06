@@ -4,6 +4,7 @@ import { base_url } from "./app/components/global";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("userToken"); // Lấy token từ cookie
+  // const res = NextResponse.redirect(new URL("/register", req.url));
   const res = NextResponse.redirect(new URL("/register", req.url));
   res.headers.set('Cache-Control', 'no-store');
   res.cookies.set("showAlert", "true");
@@ -18,7 +19,9 @@ export async function middleware(req: NextRequest) {
     .then(res => res.json())
     .then(data => {
       if(data.code == 200){
-        return NextResponse.next().headers.set('Cache-Control', 'no-store');
+        const nextResponse = NextResponse.next();
+        nextResponse.headers.set("Cache-Control", "no-store");
+        return nextResponse;
       }
       else{
         return res;

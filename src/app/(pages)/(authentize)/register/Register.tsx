@@ -3,12 +3,12 @@ import { base_url } from "@/app/components/global";
 import { InputForm } from "@/app/components/SubForm/SubForm";
 import { Toaster, toast } from 'sonner'
 import Cookies from "js-cookie";
+
 import { useRouter } from "next/navigation";
 
 
 export default function Register() {
   const showAlert = Cookies.get("showAlert");
-  console.log(showAlert);
   const router = useRouter();
   if(showAlert === "true"){
     const alertBox = document.querySelector(".inner-box-alert");
@@ -28,7 +28,6 @@ export default function Register() {
     await fetch(`${base_url}/user/register`,{
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
       },
       method: "POST",
       body: JSON.stringify(dataForm)
