@@ -6,7 +6,9 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get("userToken"); // Lấy token từ cookie
   // const res = NextResponse.redirect(new URL("/register", req.url));
   const res = NextResponse.redirect(new URL("/register", req.url));
-  res.headers.set('Cache-Control', 'no-store');
+  res.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.headers.set("Pragma", "no-cache");
+  res.headers.set("Expires", "0");
   res.cookies.set("showAlert", "true");
   if(token){
     await fetch(`${base_url}/user/authenToken`, {
@@ -20,7 +22,7 @@ export async function middleware(req: NextRequest) {
     .then(data => {
       if(data.code == 200){
         const nextResponse = NextResponse.next();
-        nextResponse.headers.set("Cache-Control", "no-store");
+        nextResponse.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
         return nextResponse;
       }
       else{

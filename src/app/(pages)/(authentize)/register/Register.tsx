@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 export default function Register() {
   const showAlert = Cookies.get("showAlert");
+  console.log(showAlert);
   const router = useRouter();
   if(showAlert === "true"){
     const alertBox = document.querySelector(".inner-box-alert");

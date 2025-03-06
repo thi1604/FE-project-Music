@@ -22,7 +22,8 @@ export const  DetailUser = () => {
     async function fetchDataUser() {
       await fetch(`${base_url}/user/detail`, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
         },
         method: "PATCH",
         body: JSON.stringify({tokenUser})
