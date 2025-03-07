@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
     "Set-Cookie",
     `showAlert=true; Path=/; ${
       process.env.NODE_ENV === "production" ? "Secure; " : ""
-    }HttpOnly; SameSite=Strict`
+    }SameSite=Lax`
   );
   if(token){
     await fetch(`${base_url}/user/authenToken`, {
@@ -30,13 +30,11 @@ export async function middleware(req: NextRequest) {
         return nextResponse;
       }
       else{
-        console.log(res);
         return res;
       }
     })
   }
   else{
-    console.log(res);
     return res;
   }
 }

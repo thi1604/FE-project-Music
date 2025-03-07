@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 export default function LoveSongs() {
   const isLogin = Cookies.get("showAlert");
   const tokenUser = Cookies.get("userToken");
+  console.log(isLogin);
   if(isLogin == "true"){
     const alertBox = document.querySelector(".inner-box-alert");
     const alert = alertBox?.querySelector(".inner-alert");
