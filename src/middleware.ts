@@ -8,9 +8,12 @@ export async function middleware(req: NextRequest) {
   res.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.headers.set("Pragma", "no-cache");
   res.headers.set("Expires", "0");
-  res.cookies.set("showAlert", "true", {
-    secure: process.env.NODE_ENV === "production",
-  });
+  res.headers.append(
+    "Set-Cookie",
+    `showAlert=true; Path=/; ${
+      process.env.NODE_ENV === "production" ? "Secure; " : ""
+    }HttpOnly; SameSite=Strict`
+  );
   if(token){
     await fetch(`${base_url}/user/authenToken`, {
       headers: {

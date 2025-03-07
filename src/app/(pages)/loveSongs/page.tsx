@@ -15,13 +15,13 @@ import { useEffect, useState } from "react";
 // };
 
 export default function LoveSongs() {
-  // const isLogin = Cookies.get("showAlert");
+  const isLogin = Cookies.get("showAlert");
   const tokenUser = Cookies.get("userToken");
-  // if(isLogin == "true"){
-  //   const alertBox = document.querySelector(".inner-box-alert");
-  //   const alert = alertBox?.querySelector(".inner-alert");
-  //   alert?.classList.remove("hidden");
-  // }
+  if(isLogin == "true"){
+    const alertBox = document.querySelector(".inner-box-alert");
+    const alert = alertBox?.querySelector(".inner-alert");
+    alert?.classList.remove("hidden");
+  }
 
   const [data, setData] = useState(null);
 
