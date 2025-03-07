@@ -6,7 +6,6 @@ import { MdCancel } from "react-icons/md";
 
 
 export const AlertComponent = () => {
-
   const handleAlert = () => {
     Cookies.set("showAlert", "false");
     const alertBox = document.querySelector(".inner-box-alert");
