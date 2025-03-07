@@ -4,16 +4,14 @@ import { base_url } from "./app/components/global";
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get("userToken");
-  const res = NextResponse.redirect(new URL("/register", req.url));
+  const res = NextResponse.rewrite(new URL("/register", req.url));
+  res.cookies.set("showAlert", "true", {
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: false
+  });
   res.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.headers.set("Pragma", "no-cache");
   res.headers.set("Expires", "0");
-  res.headers.append(
-    "Set-Cookie",
-    `showAlert=true; Path=/; ${
-      process.env.NODE_ENV === "production" ? "Secure; " : ""
-    }SameSite=Lax`
-  );
   if(token){
     await fetch(`${base_url}/user/authenToken`, {
       headers: {
