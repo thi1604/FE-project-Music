@@ -52,11 +52,11 @@ export async function PlaySong( SongCurrent:any, router: any) {
                 const numberElement = document.querySelector(".inner-number-listen");
                 if(numberElement){
                   numberElement.innerHTML = data.newListen + " lượt nghe";
-                  const boxAction = boxAudio.querySelector(".inner-action-1");
-                  const buttonNext = boxAction?.querySelector(".inner-next-song");
-                  if(buttonNext){
-                    buttonNext.click(); //Chuyen sang bai hat tiep theo
-                  }
+                }
+                const boxAction = boxAudio.querySelector(".inner-action-1");
+                const buttonNext = boxAction?.querySelector(".inner-next-song");
+                if(buttonNext){
+                  buttonNext.click(); //Chuyen sang bai hat tiep theo
                 }
               }
             }); 
@@ -99,14 +99,22 @@ export async function PlaySong( SongCurrent:any, router: any) {
       });
     }
     //Tu dong next sang bai khac khi ket thuc
-    audioElement.onended = () => {
+    audioElement.onended =  () => {
       const buttonNext = boxAction?.querySelector(".inner-next-song");
       // getLyricSong.classList.remove(`${Song.slug}`); //Xoa di slug bai hat hien tai trong micro
       if(buttonNext){
         buttonNext.click();
       }
+    }
+    // () => {
+    //   const buttonNext = boxAction?.querySelector(".inner-next-song");
+    //   // getLyricSong.classList.remove(`${Song.slug}`); //Xoa di slug bai hat hien tai trong micro
+    //   if(buttonNext){
+    //     console.log("oke2");
+    //     buttonNext.click();
+    //   }
       // if(getLyricSong){
       //   getLyricSong.click();
       // }
-    }
+    // }
 }
